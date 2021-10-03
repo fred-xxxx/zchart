@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+<!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">-->
+<!--    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">-->
+    <title>zchart</title>
+    <link rel="stylesheet" type="text/css" href="assets/app.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/jsoneditor/9.1.1/jsoneditor.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-hierarchy.v1.min.js"></script>
+    <script src="https://d3js.org/d3-path.v1.min.js"></script>
+    <script src="https://d3js.org/d3-shape.v1.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time-format.v1.min.js"></script>
+    <script src="https://d3js.org/d3-collection.v1.min.js"></script>
+    <script src="https://d3js.org/d3-array.v2.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="showBox" id="showBox"></div>
+    <div id="dividingLine"></div>
+    <div class="editBox" id="editBox"></div>
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jsoneditor/9.1.1/jsoneditor.min.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/editor.js"></script>
+<!-- You can also require other files to run in this process -->
+<script type="module" src="apps/hierarchies/tidytree.js"></script>
+<script type="module" src="apps/hierarchies/radialtidytree.js"></script>
+<script type="module" src="apps/hierarchies/clusterdendrogram.js"></script>
+<script type="module" src="apps/hierarchies/radialdendrogram.js"></script>
+<script type="module" src="apps/hierarchies/sunburst.js"></script>
+<script type="module" src="apps/hierarchies/icicle.js"></script>
+</body>
+
+</html>

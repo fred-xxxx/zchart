@@ -1,0 +1,65 @@
+{
+  "name": "zchart",
+  "productName": "zchart",
+  "description": "My Electron application description",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "zgchu",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64"
+  },
+  "devDependencies": {
+    "electron": "13.1.7",
+    "electron-builder": "^22.11.7"
+  },
+  "build": {
+    "appId": "com.z-galaxy.app",
+    "extraFiles": [
+      {
+        "from": "data",
+        "to": "data",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "fileAssociations": {
+      "ext": [
+        "zchart"
+      ],
+      "role": "Editor"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "./assets/img/zchart.ico"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "icon": "./assets/img/zchart.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "guid": "zchart",
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "./assets/img/zchart.ico",
+      "uninstallerIcon": "./assets/img/zchart.ico",
+      "installerHeaderIcon": "./assets/img/zchart.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "zchart"
+    }
+  },
+  "dependencies": {
+    "save-svg-as-png": "^1.4.17"
+  }
+}
