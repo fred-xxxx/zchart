@@ -7,12 +7,35 @@
     <!---meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
       <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"--->
     <title>zchart</title>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3-hierarchy.v1.min.js"></script>
+    <script src="https://d3js.org/d3-path.v1.min.js"></script>
+    <script src="https://d3js.org/d3-shape.v1.min.js"></script>
+    <style>
+        .node circle {
+            fill: #999;
+        }
+        .node text {
+            font: 10px sans-serif;
+        }
+        .node--internal circle {
+            fill: #555;
+        }
+        .node--internal text {
+            text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+        }
+        .link {
+            fill: none;
+            stroke: #555;
+            stroke-opacity: 0.4;
+            stroke-width: 1.5px;
+        }
+    </style>
 </head>
-
 <body>
+<svg width="960" height="2000"></svg>
 <!-- You can also require other files to run in this process -->
-<script src="./renderer.js"></script>
+<script src="./apps/mindmap.js"></script>
 </body>
 
 </html>
