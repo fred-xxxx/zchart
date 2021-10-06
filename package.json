@@ -7,12 +7,26 @@
   "version": "1.0.0",
   "author": "zgchu",
   "scripts": {
-    "start": "electron ."
-  },
-  "dependencies": {
-    "d3": "^6.7.0"
+    "start": "electron .",
+    "dist": "electron-builder --win --x64"
   },
   "devDependencies": {
-    "electron": "13.1.7"
+    "electron": "13.1.7",
+    "electron-builder": "^22.11.7"
+  },
+  "build": {
+    "appId": "com.xxx.app",
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    }
   }
 }
