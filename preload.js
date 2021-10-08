@@ -12,26 +12,48 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 const {ipcRenderer} = require('electron');
-ipcRenderer.on('mind-map', function (event, file) {
-    let data = readFile(file)
+ipcRenderer.on('open', readFile);
+ipcRenderer.on('save-as-png', saveAsPng);
 
-    let callback = window.appListener.get('mind-map')
-    callback(data)
-});
-
-function readFile(file) {
+function readFile(event, file) {
     const fs = require('fs')
     let content = fs.readFileSync(file, 'utf8').toString()
     if (!content) {
         console.log("read file", file, "fail")
     }
 
-    return JSON.parse(content)
+    let data = JSON.parse(content)
+
+    let callback = window.appListener.get('mind-map')
+    callback(data)
+}
+
+function saveAsPng(event, file) {
+    let saveAsPng = require('save-svg-as-png')
+    saveAsPng.svgAsPngUri(document.getElementById("diagram")).then(uri =>{
+        dataURLtoFile(uri, file)
+    })
+}
+
+function dataURLtoFile(dataurl, file) {
+    var arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    const fs = require('fs')
+    fs.writeFileSync(file, u8arr)
 }
 
 window.appListener = new Map()
 
 const {contextBridge} = require('electron')
+const fs = require("fs");
 contextBridge.exposeInMainWorld('API', {
     addAppListener: (name, callback) => {
         window.appListener.set(name, callback)

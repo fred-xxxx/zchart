@@ -1,17 +1,70 @@
+const {app, dialog} = require('electron');
+
 class AppMenu {
     constructor(win) {
         this.win = win;
         this.template = [{
-            label: 'file',
+            label: "&File",
             submenu: [{
-                label: 'New'
+                label: 'New',
+                accelerator: 'CommandOrControl+N'
+            }, {
+                type: 'separator'
             }, {
                 label: 'Open',
+                accelerator: 'CommandOrControl+O',
                 click: async => {
                     this.openFile()
                 }
             }, {
-                label: 'Close'
+                type: 'separator'
+            }, {
+                label: 'Save',
+                accelerator: 'CommandOrControl+S'
+            }, {
+                label: 'Save As PNG',
+                accelerator: 'CommandOrControl+Shift+S',
+                click: async => {
+                    this.saveAsPng()
+                }
+            }, {
+                type: 'separator'
+            }, {
+                label: 'Close',
+                accelerator: 'CommandOrControl+Q',
+                click: async => {
+                    app.quit()
+                }
+            }]
+        }, {
+            label: '&Mode',
+            submenu: [{
+                label: 'mind-map',
+                accelerator: 'CommandOrControl+M'
+            }]
+        }, {
+            label: '&View',
+            submenu: [{
+                label: 'data mode',
+                type: 'radio'
+            }, {
+                label: 'diagram mode',
+                type: 'radio'
+            }, {
+                label: 'data-diagram mode',
+                type: 'radio'
+            }]
+        }, {
+            label: '&About',
+            submenu: [{
+                label: 'register',
+                accelerator: 'CommandOrControl+R'
+            }, {
+                label: 'logo in',
+                accelerator: 'CommandOrControl+L'
+            }, {
+                label: 'about us',
+                accelerator: 'CommandOrControl+A'
             }]
         }];
     }
@@ -21,7 +74,7 @@ class AppMenu {
     }
 
     openFile() {
-        const {ipcMain, dialog} = require("electron");
+        const {dialog} = require("electron");
 
         let options = {
             // See place holder 1 in above image
@@ -44,8 +97,33 @@ class AppMenu {
         //Synchronous
         let filePaths = dialog.showOpenDialogSync(this.win, options)
         if (filePaths) {
-            // console.log("open file", filePaths[0])
-            this.win.webContents.send('mind-map', filePaths[0])
+            this.win.webContents.send('open', filePaths[0])
+        }
+    }
+
+    saveAsPng() {
+        const {dialog} = require("electron");
+
+        let options = {
+            // See place holder 1 in above image
+            title: "Save",
+
+            // See place holder 2 in above image
+            defaultPath: "./",
+
+            // See place holder 3 in above image
+            buttonLabel: "Save",
+
+            // See place holder 4 in above image
+            filters: [
+                {name: 'PNG', extensions: ['png']}
+            ]
+        }
+
+        //Synchronous
+        let filePath = dialog.showSaveDialogSync(this.win, options)
+        if (filePath) {
+            this.win.webContents.send('save-as-png', filePath)
         }
     }
 }
